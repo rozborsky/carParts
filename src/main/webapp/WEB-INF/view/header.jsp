@@ -6,7 +6,6 @@
 
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>shop</title>
 
  		<meta charset="utf-8">
@@ -14,10 +13,16 @@
         <link href="webjars/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
         <link rel="shortcut icon" href='<c:url value="/resources/images/favicon.png" />' type="image/x-icon">
-
         <style>
 			<%@include file='styles.css'%>
         </style>
 	</head>
 	<body>
 		<div class="container" id="mainLayout">
+
+		    <div class="col-12" id="header">
+		        <ul class="nav navbar-nav navbar-right">
+                      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                      <li><a href="registration"><span class="glyphicon glyphicon-user"></span>реєстрація</a></li>
+                    </ul>
+		    </div>

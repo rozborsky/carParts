@@ -7,8 +7,6 @@ import org.mongodb.morphia.Morphia;
 import org.springframework.stereotype.Component;
 import ua.rozborsky.shop.interfaces.DAO;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by roman on 19.11.2016.
