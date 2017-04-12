@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ua.rozborsky.shop.dbClasses.RegisteredPerson;
 import ua.rozborsky.shop.interfaces.DAO;
+import ua.rozborsky.shop.interfaces.Mail;
 import ua.rozborsky.shop.interfaces.Person;
 
 import javax.validation.Valid;
@@ -23,6 +24,8 @@ public class Controller {
     @Autowired
     private Person person;
 
+    @Autowired
+    Mail mail;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
@@ -50,6 +53,7 @@ public class Controller {
         }
 
         dao.savePerson(person);
+        mail.send(person.geteMail(), "www.carParts.ua");
 
         return "confirmRegistration";
     }

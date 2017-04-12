@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri = "http://www.springframework.org/tags/form" prefix = "form"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
 	<jsp:include page="header.jsp" />
 	<form:form method = "POST" modelAttribute = "registeredPerson" action = "processingRegistration">
     <table>
@@ -42,7 +43,7 @@
            <td colspan = "3" style="color:red">CAPCHA</td>
         </tr>
         <tr>
-           <td colspan = "3">поля позначені * мають бути обов\'язково заповнені'</td>
+           <td colspan = "3">поля позначені * мають бути обов'язково заповнені'</td>
         </tr>
 
         <tr>
