@@ -1,11 +1,12 @@
 package ua.rozborsky.shop.classes;
 
-import com.mongodb.*;
-
+import com.mongodb.MongoClient;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ua.rozborsky.shop.interfaces.DAO;
+import ua.rozborsky.shop.interfaces.Person;
 
 
 /**
@@ -13,47 +14,25 @@ import ua.rozborsky.shop.interfaces.DAO;
  */
 @Component
 public class DAOImpl implements DAO {
-    private MongoClient mc;
     private Morphia morphia;
+    private MongoClient mongo;
+    private Datastore datastore;
+
+    @Autowired
+    TimeManager timeManager;
 
     public DAOImpl(){
-        mc = new MongoClient("localhost", 27017);
-        morphia =  new Morphia();
-        DB database = mc.getDB("Examples");
-
-        DBObject person = new BasicDBObject()
-                .append("name", "Jo Bloggs")
-                .append("address", new BasicDBObject("street", "123 Fake St")
-                        .append("city", "Faketon")
-                        .append("state", "MA")
-                        .append("zip", 12345))
-                .append("books", "ggg");
-
-        try {
-
-            final Datastore datastore = morphia.createDatastore(mc, "morphia_examplet");
-            datastore.ensureIndexes();
-            datastore.save(person);
-
-            DBCollection collection = database.getCollection("people");
-            collection.insert(person);
-        }
-        catch (Exception e) {
-            throw new RuntimeException("Error initializing mongo db", e);
-        }
-
-
+        morphia = new Morphia();
+        morphia.mapPackage("ua.rozborsky.shop.dbClasses");
+        mongo = new MongoClient();
+        datastore = morphia.createDatastore(mongo, "car_parts");
+        datastore.ensureIndexes();
     }
 
-    public Datastore createDatastore(String database){
-        Datastore ds=morphia.createDatastore(mc,database);
-        ds.ensureIndexes();
-        ds.ensureCaps();
-        return ds;
-    }
 
     @Override
-    public void saveValues() {
-
+    public void savePerson(Person person) {
+        person.setTimestamp(timeManager.getCurrentTimestamp());
+        datastore.save(person);
     }
 }

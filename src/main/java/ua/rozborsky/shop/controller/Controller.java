@@ -1,13 +1,14 @@
 package ua.rozborsky.shop.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-import ua.rozborsky.shop.classes.DAOImpl;
-import ua.rozborsky.shop.classes.RegisteredPerson;
+import ua.rozborsky.shop.dbClasses.RegisteredPerson;
+import ua.rozborsky.shop.interfaces.DAO;
+import ua.rozborsky.shop.interfaces.Person;
 
 import javax.validation.Valid;
 
@@ -16,19 +17,23 @@ import javax.validation.Valid;
  */
 @org.springframework.stereotype.Controller
 public class Controller {
+    @Autowired
+    private DAO dao;
+
+    @Autowired
+    private Person person;
+
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
-        new DAOImpl();
 
         return "home";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
-        new DAOImpl();//-----------------------
 
-        model.addAttribute("registeredPerson", new RegisteredPerson());
+        model.addAttribute("registeredPerson", person);
 
 
         return "registration";
@@ -36,24 +41,17 @@ public class Controller {
 
     @RequestMapping(value = "/processingRegistration", method = RequestMethod.POST)
     public String confirmRegistration(@Valid @ModelAttribute(value = "registeredPerson")
-                                              RegisteredPerson registeredPerson, BindingResult bindingResult) {
-
-        if(!registeredPerson.getPassword().equals(registeredPerson.getConfirmPassword())) {
+                                                  RegisteredPerson person, BindingResult bindingResult) {
+        if(!person.getPassword().equals(person.getConfirmPassword())) {
             bindingResult.rejectValue("password", "isValid", "паролі не співпадають");
         }
         if (bindingResult.hasErrors()) {
             return "registration";
         }
 
-        System.out.println(registeredPerson.getName());
-        System.out.println(registeredPerson.getSurname());
-        System.out.println(registeredPerson.getAddress());
-        System.out.println(registeredPerson.getPhone());
-        System.out.println(registeredPerson.getPassword());
-        System.out.println(registeredPerson.getConfirmPassword());
-        //add data to DB
-        //створити сесі
-            return "confirmRegistration";
+        dao.savePerson(person);
+
+        return "confirmRegistration";
     }
 
 }

@@ -1,24 +1,36 @@
-package ua.rozborsky.shop.classes;
+package ua.rozborsky.shop.dbClasses;
 
+import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Property;
+import org.mongodb.morphia.annotations.Transient;
+import org.springframework.stereotype.Component;
 import ua.rozborsky.shop.interfaces.Person;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  * Created by roman on 09.03.2017.
  */
-
+@Entity("wait_confirm")
+@Component
 public class RegisteredPerson implements Person {
+    @Id
+    @Property("id")
+    protected ObjectId id;
+
     @NotEmpty(message="вкажіть ім'я")
     @Size(min = 2, max = 20, message="ім'я повинно бути довжиною не від 2-х до 20-и символів")
-    @Pattern(regexp = "^[a-zA-Zа-яА-Я]*$", message="неправильний формат імені")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я'ії]*$", message="неправильний формат імені")
     private String name;
 
     @NotEmpty(message="вкажіть прізвище")
     @Size(min = 2, max = 20, message="прізвище повинно бути довжиною не від 2-х до 30-и символів")
-    @Pattern(regexp = "^[a-zA-Zа-яА-Я]*$", message="неправильний формат прізвища")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я'ії]*$", message="неправильний формат прізвища")
     private String surname;
 
     @Pattern(regexp = "\\d*", message="лише цифри")
@@ -33,7 +45,19 @@ public class RegisteredPerson implements Person {
     @NotEmpty(message="вкажіть пароль")
     @Size(min = 6, max = 15, message="пароль повинен бути довжиною не менше 6-х і не більше 15-и символів")
     private String password;
+
+    @Transient
     private String confirmPassword;
+    private long timestamp;
+
+
+    public Object getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -89,5 +113,13 @@ public class RegisteredPerson implements Person {
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }
