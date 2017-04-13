@@ -48,7 +48,7 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/processingRegistration", method = RequestMethod.POST)
-    public String confirmRegistration(@Valid @ModelAttribute(value = "registeredPerson")
+    public String confirmRegistration(@Valid @ModelAttribute(value = "tmpUser")
                                               TmpUser tmpUser, BindingResult bindingResult) {
         if(!tmpUser.getPassword().equals(tmpUser.getConfirmPassword())) {
             bindingResult.rejectValue("password", "isValid", "паролі не співпадають");//todo exseption binding result - empty fields
