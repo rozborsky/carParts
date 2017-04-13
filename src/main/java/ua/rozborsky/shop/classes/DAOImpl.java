@@ -39,7 +39,6 @@ public class DAOImpl implements DAO {
         TmpUser user = datastore.find(TmpUser.class)
                 .field("timestamp").equal(timestamp).get();//todo exception?
 
-
         return user;
     }
 
@@ -48,7 +47,6 @@ public class DAOImpl implements DAO {
         removeUser(tmpUser.getTimestamp());
 
         User user = new User();
-
         user.setName(tmpUser.getName());
         user.setSurname(tmpUser.getSurname());
         user.setPhone(tmpUser.getPhone());

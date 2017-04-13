@@ -2,13 +2,13 @@ package ua.rozborsky.shop.dbClasses;
 
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Transient;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Scope;
 
 /**
  * Created by roman on 09.03.2017.
  */
 @Entity("wait_confirm")
-@Component
+@Scope(value="prototype")
 public class TmpUser extends User {
     @Transient
     private String confirmPassword;

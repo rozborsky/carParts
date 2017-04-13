@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
+import org.springframework.context.annotation.Scope;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -14,6 +15,7 @@ import javax.validation.constraints.Size;
  * Created by roman on 09.03.2017.
  */
 @Entity("users")
+@Scope(value="prototype")
 public class User {
     @Id
     @Property("id")
@@ -41,7 +43,6 @@ public class User {
     @NotEmpty(message="вкажіть пароль")
     @Size(min = 6, max = 15, message="пароль повинен бути довжиною не менше 6-х і не більше 15-и символів")
     private String password;
-
 
     private long timestamp;
 
