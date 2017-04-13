@@ -2,7 +2,7 @@
 <%@taglib uri = "http://www.springframework.org/tags/form" prefix = "form"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 	<jsp:include page="header.jsp" />
-	<form:form method = "POST" modelAttribute = "registeredPerson" action = "processingRegistration">
+	<form:form method = "POST" modelAttribute = "tmpUser" action = "processingRegistration">
     <table>
         <tr>
            <td><form:label path = "name">Name *</form:label></td>

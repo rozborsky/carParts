@@ -3,10 +3,11 @@ package ua.rozborsky.shop.classes;
 import com.mongodb.MongoClient;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mongodb.morphia.query.Query;
 import org.springframework.stereotype.Component;
+import ua.rozborsky.shop.dbClasses.TmpUser;
+import ua.rozborsky.shop.dbClasses.User;
 import ua.rozborsky.shop.interfaces.DAO;
-import ua.rozborsky.shop.interfaces.Person;
 
 
 /**
@@ -14,12 +15,10 @@ import ua.rozborsky.shop.interfaces.Person;
  */
 @Component
 public class DAOImpl implements DAO {
+
     private Morphia morphia;
     private MongoClient mongo;
     private Datastore datastore;
-
-    @Autowired
-    TimeManager timeManager;
 
     public DAOImpl(){
         morphia = new Morphia();
@@ -31,8 +30,39 @@ public class DAOImpl implements DAO {
 
 
     @Override
-    public void savePerson(Person person) {
-        person.setTimestamp(timeManager.getCurrentTimestamp());
-        datastore.save(person);
+    public void saveUser(User user) {
+        datastore.save(user);
+    }
+
+    @Override
+    public TmpUser getUser(long timestamp) {
+        TmpUser user = datastore.find(TmpUser.class)
+                .field("timestamp").equal(timestamp).get();//todo exception?
+
+
+        return user;
+    }
+
+    @Override
+    public void registerUser(TmpUser tmpUser) {
+        removeUser(tmpUser.getTimestamp());
+
+        User user = new User();
+
+        user.setName(tmpUser.getName());
+        user.setSurname(tmpUser.getSurname());
+        user.setPhone(tmpUser.getPhone());
+        user.setAddress(tmpUser.getAddress());
+        user.seteMail(tmpUser.geteMail());
+        user.setPassword(tmpUser.getPassword());
+        user.setTimestamp(tmpUser.getTimestamp());
+
+        saveUser(user);
+    }
+
+    private void removeUser(long timestamp) {
+        final Query<TmpUser> removeUser = datastore.createQuery(TmpUser.class)
+                .filter("timestamp =", timestamp);
+        datastore.delete(removeUser);
     }
 }

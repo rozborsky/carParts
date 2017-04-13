@@ -8,4 +8,7 @@
                             http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
     <context:annotation-config/>
+
+    <bean id="tmpPerson" class="ua.rozborsky.shop.dbClasses.TmpUser"></bean>
+    <bean id="person" class="ua.rozborsky.shop.dbClasses.User"></bean>
 </beans>

@@ -6,9 +6,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
-import org.mongodb.morphia.annotations.Transient;
-import org.springframework.stereotype.Component;
-import ua.rozborsky.shop.interfaces.Person;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -16,9 +13,8 @@ import javax.validation.constraints.Size;
 /**
  * Created by roman on 09.03.2017.
  */
-@Entity("wait_confirm")
-@Component
-public class RegisteredPerson implements Person {
+@Entity("users")
+public class User {
     @Id
     @Property("id")
     protected ObjectId id;
@@ -46,8 +42,7 @@ public class RegisteredPerson implements Person {
     @Size(min = 6, max = 15, message="пароль повинен бути довжиною не менше 6-х і не більше 15-и символів")
     private String password;
 
-    @Transient
-    private String confirmPassword;
+
     private long timestamp;
 
 
@@ -105,14 +100,6 @@ public class RegisteredPerson implements Person {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
     }
 
     public long getTimestamp() {
