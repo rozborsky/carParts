@@ -22,7 +22,7 @@
 
 		    <div class="col-12" id="header">
 		        <ul class="nav navbar-nav navbar-right">
-                      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                      <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                       <li><a href="registration"><span class="glyphicon glyphicon-user"></span>реєстрація</a></li>
                     </ul>
 		    </div>
