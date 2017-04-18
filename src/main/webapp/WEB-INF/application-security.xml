@@ -5,8 +5,10 @@
     http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
     <http use-expressions="true" >
+
         <intercept-url pattern="/login" access="hasRole('ADMIN')" />
         <logout logout-success-url="/loginPage" invalidate-session="true" logout-url="/logout" />
+        <access-denied-handler error-page="/accessDenied" />
 
         <form-login
                 login-page="/loginPage"
@@ -14,13 +16,13 @@
                 authentication-failure-url="/loginPage?error=true"
                 username-parameter="user_login"
                 password-parameter="password_login" />
-
     </http>
 
     <authentication-manager >
         <authentication-provider>
             <user-service>
                 <user name="admin" password="root123" authorities="ROLE_ADMIN" />
+                <user name="user" password="root123" authorities="ROLE_USER" />
             </user-service>
         </authentication-provider>
     </authentication-manager>
