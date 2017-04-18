@@ -1,0 +1,29 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+    <http use-expressions="true" >
+        <intercept-url pattern="/login" access="hasRole('ADMIN')" />
+        <logout logout-success-url="/loginPage" invalidate-session="true" logout-url="/logout" />
+
+        <form-login
+                login-page="/loginPage"
+                default-target-url="/cabinet"
+                authentication-failure-url="/loginPage?error=true"
+                username-parameter="user_login"
+                password-parameter="password_login" />
+
+    </http>
+
+    <authentication-manager >
+        <authentication-provider>
+            <user-service>
+                <user name="admin" password="root123" authorities="ROLE_ADMIN" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+
+</beans:beans>

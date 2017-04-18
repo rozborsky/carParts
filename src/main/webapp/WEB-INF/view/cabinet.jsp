@@ -3,7 +3,7 @@
 	<div class="row">
     	<div class="col-12" id="aboutMe">
 			<p id="text">
-			    cabinet
+				LOGIN
 			</p>
 		</div>
 	</div>

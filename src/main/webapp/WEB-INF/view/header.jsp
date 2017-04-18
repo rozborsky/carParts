@@ -19,10 +19,16 @@
 	</head>
 	<body>
 		<div class="container" id="mainLayout">
-
 		    <div class="col-12" id="header">
 		        <ul class="nav navbar-nav navbar-right">
-                      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                      <li><a href="registration"><span class="glyphicon glyphicon-user"></span>реєстрація</a></li>
-                    </ul>
+                    <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li><a href="registration"><span class="glyphicon glyphicon-user"></span>реєстрація</a></li>
+
+                    <li><c:url var="logoutUrl" value="/logout"/>
+                        <form action="${logoutUrl}" method="post">
+                            <input type="submit" value="Logout"/>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </form>
+                    </li>
+                </ul>
 		    </div>
