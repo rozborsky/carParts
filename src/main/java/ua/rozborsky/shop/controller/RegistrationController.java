@@ -77,7 +77,7 @@ public class RegistrationController {
 
             return "redirect:/finishRegistration";
         } else {
-            return "redirect:/error404";
+            return "redirect:/codeNotValid";
         }
     }
 
@@ -86,9 +86,9 @@ public class RegistrationController {
         return "finishRegistration";
     }
 
-    @RequestMapping(value = "/error404", method = RequestMethod.GET)
-    public String error404() {
-        return "error404";
+    @RequestMapping(value = "/codeNotValid", method = RequestMethod.GET)
+    public String codeNotValid() {
+        return "codeNotValid";
     }
 
 }
