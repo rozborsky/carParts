@@ -16,6 +16,8 @@
         <style>
 			<%@include file='styles.css'%>
         </style>
+
+
 	</head>
 	<body>
 		<div class="container" id="mainLayout">

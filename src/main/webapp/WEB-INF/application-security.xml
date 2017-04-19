@@ -6,6 +6,8 @@
 
     <http use-expressions="true" >
 
+        <remember-me remember-me-parameter="rememberMe"/>
+
         <intercept-url pattern="/login" access="hasRole('ADMIN')" />
         <logout logout-success-url="/loginPage" invalidate-session="true" logout-url="/logout" />
         <access-denied-handler error-page="/accessDenied" />
