@@ -3,6 +3,8 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 
 <html>
 	<head>
@@ -25,12 +27,13 @@
 		        <ul class="nav navbar-nav navbar-right">
                     <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     <li><a href="registration"><span class="glyphicon glyphicon-user"></span>реєстрація</a></li>
-
-                    <li><c:url var="logoutUrl" value="/logout"/>
-                        <form action="${logoutUrl}" method="post">
-                            <input type="submit" value="Logout"/>
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        </form>
-                    </li>
+                    <sec:authorize access="isAuthenticated()">
+                        <li><c:url var="logoutUrl" value="/logout"/>
+                            <form action="${logoutUrl}" method="post">
+                                <input type="submit" value="Logout"/>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            </form>
+                        </li>
+                    </sec:authorize>
                 </ul>
 		    </div>
