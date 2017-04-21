@@ -11,4 +11,5 @@
 
     <bean id="tmpPerson" class="ua.rozborsky.shop.dbClasses.TmpUser"></bean>
     <bean id="person" class="ua.rozborsky.shop.dbClasses.User"></bean>
+    <!--<bean id="loginServise" class="ua.rozborsky.shop.dbClasses.LoginService"></bean>-->
 </beans>

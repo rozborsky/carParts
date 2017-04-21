@@ -19,14 +19,19 @@
 			<%@include file='styles.css'%>
         </style>
 
-
 	</head>
 	<body>
 		<div class="container" id="mainLayout">
 		    <div class="col-12" id="header">
 		        <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                    <li><a href="registration"><span class="glyphicon glyphicon-user"></span>реєстрація</a></li>
+		            <sec:authorize access="isAnonymous()">
+                        <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        <li><a href="registration"><span class="glyphicon glyphicon-user"></span>реєстрація</a></li>
+                    </sec:authorize>
+
+                    <sec:authorize access="hasRole('ADMIN')">
+                        <li><a href="admin"><span class="glyphicon glyphicon-user"></span>admin</a></li>
+                    </sec:authorize>
                     <sec:authorize access="isAuthenticated()">
                         <li><c:url var="logoutUrl" value="/logout"/>
                             <form action="${logoutUrl}" method="post">

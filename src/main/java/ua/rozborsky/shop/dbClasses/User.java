@@ -46,6 +46,8 @@ public class User {
 
     private long timestamp;
 
+    private int role = 2;
+
 
     public Object getId() {
         return id;
@@ -109,5 +111,13 @@ public class User {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public int getRole() {
+        return role;
+    }
+
+    public void setRole(int role) {
+        this.role = role;
     }
 }

@@ -1,12 +1,10 @@
-package ua.rozborsky.shop.classes;
+package ua.rozborsky.shop.dbClasses;
 
 import com.mongodb.MongoClient;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.query.Query;
 import org.springframework.stereotype.Component;
-import ua.rozborsky.shop.dbClasses.TmpUser;
-import ua.rozborsky.shop.dbClasses.User;
 import ua.rozborsky.shop.interfaces.DAO;
 
 
@@ -25,7 +23,7 @@ public class DAOImpl implements DAO {
         morphia.mapPackage("ua.rozborsky.shop.dbClasses");
         mongo = new MongoClient();
         datastore = morphia.createDatastore(mongo, "car_parts");
-        datastore.ensureIndexes();
+//        datastore.ensureIndexes();
     }
 
 
@@ -36,10 +34,8 @@ public class DAOImpl implements DAO {
 
     @Override
     public TmpUser getUser(long timestamp) {
-        TmpUser user = datastore.find(TmpUser.class)
-                .field("timestamp").equal(timestamp).get();//todo exception?
 
-        return user;
+        return datastore.find(TmpUser.class).field("timestamp").equal(timestamp).get();//todo exception?;
     }
 
     @Override
@@ -62,5 +58,10 @@ public class DAOImpl implements DAO {
         final Query<TmpUser> removeUser = datastore.createQuery(TmpUser.class)
                 .filter("timestamp =", timestamp);
         datastore.delete(removeUser);
+    }
+
+    public User findUserByLogin(String username) {
+
+        return datastore.find(User.class).field("phone").equal(username).get();
     }
 }

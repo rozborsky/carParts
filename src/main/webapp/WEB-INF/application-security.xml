@@ -9,6 +9,7 @@
         <remember-me remember-me-parameter="rememberMe"/>
 
         <intercept-url pattern="/login" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
         <logout logout-success-url="/loginPage" invalidate-session="true" logout-url="/logout" />
         <access-denied-handler error-page="/accessDenied" />
 
@@ -27,6 +28,10 @@
                 <user name="user" password="root123" authorities="ROLE_USER" />
             </user-service>
         </authentication-provider>
+
+        <!--<authentication-provider user-service-ref="loginServise">-->
+            <!--&lt;!&ndash;<password-encoder hash="sha" />&ndash;&gt;-->
+        <!--</authentication-provider>-->
     </authentication-manager>
 
 

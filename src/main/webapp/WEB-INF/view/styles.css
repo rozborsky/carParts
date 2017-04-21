@@ -37,3 +37,7 @@ H1{
 img{
     width: 100%;
 }
+
+li{
+    display: inline;
+}

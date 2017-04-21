@@ -31,7 +31,7 @@ public class Controller {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
 
-        return "login";
+        return "redirect:/cabinet";
     }
 
     @RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
@@ -41,4 +41,14 @@ public class Controller {
     }
 
 
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String admin() {
+
+        return "admin";
+    }
+    @RequestMapping(value = "/cabinet", method = RequestMethod.GET)
+    public String cabinet() {
+
+        return "cabinet";
+    }
 }

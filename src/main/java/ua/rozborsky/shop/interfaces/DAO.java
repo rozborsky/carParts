@@ -10,4 +10,5 @@ public interface DAO {
     void saveUser(User person);
     TmpUser getUser(long timestamp);
     void registerUser(TmpUser person);
+    User findUserByLogin(String username);
 }

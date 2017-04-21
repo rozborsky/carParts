@@ -31,13 +31,13 @@ public class RegistrationController {
     private User tmpUser;
 
     @Autowired
-    Mail mail;
+    private Mail mail;
 
     @Autowired
-    TimeManager timeManager;
+    private TimeManager timeManager;
 
     @Autowired
-    Encoder encoder;
+    private Encoder encoder;
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
