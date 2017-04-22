@@ -11,4 +11,5 @@ public interface DaoGoods {
     List<Category> getCategories();
     Category getCategory();
     void addCategory(Category category);
+    void deleteCategory(String name);
 }

@@ -3,6 +3,7 @@ package ua.rozborsky.shop.dbClasses;
 import com.mongodb.MongoClient;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.query.Query;
 import org.springframework.stereotype.Component;
 import ua.rozborsky.shop.classes.Category;
 import ua.rozborsky.shop.interfaces.DaoGoods;
@@ -18,6 +19,7 @@ public class DaoGoodsImpl implements DaoGoods{
     private Morphia morphia;
     private MongoClient mongo;
     private Datastore datastore;
+    Category category;
 
     public DaoGoodsImpl(){
         morphia = new Morphia();
@@ -25,6 +27,11 @@ public class DaoGoodsImpl implements DaoGoods{
         mongo = new MongoClient();
         datastore = morphia.createDatastore(mongo, "car_parts");
         //datastore.ensureIndexes();
+        category = new Category();
+        category.setName("name");
+        category.setImage("image");
+        category.setDescription("description");
+        addCategory(category);
     }
 
     @Override
@@ -41,5 +48,11 @@ public class DaoGoodsImpl implements DaoGoods{
     @Override
     public void addCategory(Category category) {
         datastore.save(category);
+    }
+
+    @Override
+    public void deleteCategory(String name) {
+        Query<Category> deleteCategory = datastore.createQuery(Category.class).field("name").equal(name);
+        datastore.delete(deleteCategory);
     }
 }

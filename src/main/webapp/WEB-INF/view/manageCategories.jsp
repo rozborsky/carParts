@@ -7,23 +7,25 @@
     <table>
         <tr>
             <th>name</th>
-            <th>description</th>
             <th>image</th>
+            <th>description</th>
+            <th></th>
         </tr>
 
         <c:if test="${not empty categories}">
             <c:forEach var="category" items="${categories}">
                 <tr>
                     <td>${category.getName()}</td>
-                    <td>${category.getDescription()}</td>
                     <td>${category.getImage()}</td>
+                    <td>${category.getDescription()}</td>
+                    <td><a href="deleteCategory/${category.getName()}">delete</a></td>
                 </tr>
-                <li></li>
+
             </c:forEach>
         </c:if>
 
         <tr>
-            <form:form method = "POST" action = "categories" modelAttribute="category">
+            <form:form method = "POST" action = "manageCategories" modelAttribute="category">
                 <td><form:input path = "name"/></td>
                 <td><form:input path = "image"/></td>
                 <td><form:input path = "description"/>

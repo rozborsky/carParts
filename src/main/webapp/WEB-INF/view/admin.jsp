@@ -3,7 +3,7 @@
 	<div class="row">
     	<div class="col-12" id="aboutMe">
 			admin
-			<a href="admin/categories">categories</a>
+			<a href="admin/manageCategories">categories</a>
 		</div>
 	</div>
 	<jsp:include page="footer.jsp" />
